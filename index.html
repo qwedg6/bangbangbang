@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>棒梆帮 - 胶州本地靠谱维修</title>
+    <style>
+        :root {
+            --orange: #F57C00;
+            --orange-light: #FFF3E0;
+            --dark: #333333;
+            --gray: #666666;
+            --light-gray: #F5F5F5;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            background: var(--white);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ===== 顶部导航 ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            padding: 0 20px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+        }
+
+        .nav-logo {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--orange);
+            letter-spacing: 2px;
+        }
+
+        .nav-phone {
+            font-size: 14px;
+            color: var(--dark);
+            text-decoration: none;
+            background: var(--orange-light);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .nav-phone:hover {
+            background: var(--orange);
+            color: var(--white);
+        }
+
+        /* ===== Hero ===== */
+        .hero {
+            margin-top: 56px;
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            padding: 50px 20px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 120px;
+            background: rgba(245,124,0,0.08);
+            border-radius: 50%;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--orange);
+            color: var(--white);
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero .brand-desc {
+            font-size: 14px;
+            color: var(--gray);
+            margin-bottom: 6px;
+            letter-spacing: 2px;
+        }
+
+        .hero .hero-subtitle {
+            font-size: 17px;
+            color: #444;
+            font-weight: 500;
+            margin-top: 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero .hero-location {
+            font-size: 14px;
+            color: var(--orange);
+            margin-top: 8px;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            margin-top: 24px;
+            background: var(--orange);
+            color: var(--white);
+            text-decoration: none;
+            padding: 14px 40px;
+            border-radius: 30px;
+            font-size: 17px;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s;
+            box-shadow: 0 4px 16px rgba(245,124,0,0.3);
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(245,124,0,0.4);
+        }
+
+        /* ===== 品牌释义 ===== */
+        .brand-meaning {
+            padding: 40px 20px;
+            text-align: center;
+            background: var(--white);
+        }
+
+        .brand-meaning h2 {
+            font-size: 22px;
+            margin-bottom: 24px;
+            color: var(--dark);
+        }
+
+        .meaning-cards {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .meaning-card {
+            flex: 1 1 100px;
+            max-width: 160px;
+            min-width: 100px;
+            background: var(--light-gray);
+            border-radius: 16px;
+            padding: 20px 12px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .meaning-card:hover {
+            background: var(--orange-light);
+            transform: translateY(-4px);
+        }
+
+        .meaning-card .char {
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--orange);
+            display: block;
+            margin-bottom: 8px;
+            line-height: 1;
+        }
+
+        .meaning-card .label {
+            font-size: 13px;
+            color: var(--dark);
+            font-weight: 700;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .meaning-card .desc {
+            font-size: 11px;
+            color: var(--gray);
+            line-height: 1.4;
+        }
+
+        /* ===== 服务项目 ===== */
+        .services {
+            padding: 40px 20px;
+            background: var(--light-gray);
+        }
+
+        .services h2 {
+            text-align: center;
+            font-size: 22px;
+            margin-bottom: 6px;
+        }
+
+        .services .section-desc {
+            text-align: center;
+            font-size: 14px;
+            color: var(--gray);
+            margin-bottom: 24px;
+        }
+
+        .service-list {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .service-item {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 16px 18px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .service-item:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            transform: translateX(2px);
+        }
+
+        .service-icon {
+            font-size: 32px;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--orange-light);
+            border-radius: 12px;
+            flex-shrink: 0;
+        }
+
+        .service-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .service-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .service-tags {
+            font-size: 12px;
+            color: var(--gray);
+            margin-top: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .service-price {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--orange);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .service-price small {
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--gray);
+        }
+
+        /* ===== 三大承诺 ===== */
+        .promises {
+            padding: 40px 20px;
+            background: var(--white);
+            text-align: center;
+        }
+
+        .promises h2 {
+            font-size: 22px;
+            margin-bottom: 24px;
+        }
+
+        .promise-grid {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .promise-card {
+            flex: 1 1 120px;
+            max-width: 180px;
+            min-width: 120px;
+            padding: 24px 14px;
+            border-radius: 16px;
+            background: var(--light-gray);
+            transition: all 0.3s;
+        }
+
+        .promise-card:hover {
+            background: var(--orange-light);
+        }
+
+        .promise-icon {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .promise-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 4px;
+        }
+
+        .promise-desc {
+            font-size: 12px;
+            color: var(--gray);
+            line-height: 1.5;
+        }
+
+        /* ===== 怎么用 ===== */
+        .how-to {
+            padding: 40px 20px;
+            background: var(--orange-light);
+            text-align: center;
+        }
+
+        .how-to h2 {
+            font-size: 22px;
+            margin-bottom: 24px;
+        }
+
+        .steps {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .step {
+            flex: 1 1 100px;
+            max-width: 150px;
+            min-width: 90px;
+            text-align: center;
+        }
+
+        .step-num {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--orange);
+            color: var(--white);
+            font-size: 22px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+        }
+
+        .step-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 4px;
+        }
+
+        .step-desc {
+            font-size: 12px;
+            color: var(--gray);
+        }
+
+        /* ===== 师傅 ===== */
+        .workers {
+            padding: 40px 20px;
+            background: var(--white);
+            text-align: center;
+        }
+
+        .workers h2 {
+            font-size: 22px;
+            margin-bottom: 6px;
+        }
+
+        .workers .section-desc {
+            font-size: 14px;
+            color: var(--gray);
+            margin-bottom: 24px;
+        }
+
+        .worker-cards {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .worker-card {
+            flex: 1 1 200px;
+            max-width: 280px;
+            min-width: 150px;
+            background: var(--light-gray);
+            border-radius: 16px;
+            padding: 24px 16px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .worker-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+
+        .worker-avatar {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FFE0B2, #FFB74D);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            margin: 0 auto 14px;
+        }
+
+        .worker-name {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .worker-skill {
+            font-size: 13px;
+            color: var(--orange);
+            font-weight: 600;
+            margin: 4px 0;
+        }
+
+        .worker-year {
+            font-size: 12px;
+            color: var(--gray);
+        }
+
+        .worker-badge {
+            display: inline-block;
+            background: var(--orange-light);
+            color: var(--orange);
+            font-size: 11px;
+            padding: 3px 10px;
+            border-radius: 10px;
+            margin-top: 8px;
+            font-weight: 600;
+        }
+
+        /* ===== FAQ ===== */
+        .faq {
+            padding: 40px 20px;
+            background: var(--light-gray);
+        }
+
+        .faq h2 {
+            text-align: center;
+            font-size: 22px;
+            margin-bottom: 24px;
+        }
+
+        .faq-list {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .faq-item {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .faq-question {
+            padding: 16px 18px;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--dark);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 22px;
+            color: var(--orange);
+            font-weight: 400;
+            transition: transform 0.3s;
+            flex-shrink: 0;
+            margin-left: 12px;
+        }
+
+        .faq-item.open .faq-question::after {
+            content: '−';
+            transform: rotate(0deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease, padding 0.35s ease;
+            font-size: 14px;
+            color: var(--gray);
+            padding: 0 18px;
+            line-height: 1.7;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 200px;
+            padding: 0 18px 16px;
+        }
+
+        /* ===== 联系 ===== */
+        .contact {
+            padding: 50px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, #333 0%, #444 100%);
+            color: var(--white);
+        }
+
+        .contact h2 {
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .contact .contact-desc {
+            font-size: 14px;
+            opacity: 0.75;
+            margin-bottom: 28px;
+        }
+
+        .contact-card {
+            background: rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 30px 20px;
+            max-width: 400px;
+            margin: 0 auto;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-phone {
+            display: block;
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--white);
+            text-decoration: none;
+            letter-spacing: 2px;
+            margin-bottom: 6px;
+            transition: color 0.2s;
+        }
+
+        .contact-phone:hover {
+            color: var(--orange);
+        }
+
+        .contact-label {
+            font-size: 13px;
+            opacity: 0.6;
+            margin-bottom: 20px;
+        }
+
+        .contact-qr {
+            width: 140px;
+            height: 140px;
+            background: var(--white);
+            border-radius: 16px;
+            margin: 0 auto 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            font-size: 12px;
+        }
+
+        .qr-placeholder {
+            width: 110px;
+            height: 110px;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            color: #999;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .qr-tip {
+            font-size: 12px;
+            opacity: 0.5;
+        }
+
+        /* ===== 底部 ===== */
+        .footer {
+            padding: 24px 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            background: #222;
+            line-height: 1.8;
+        }
+
+        .footer .brand {
+            color: var(--orange);
+            font-weight: 700;
+        }
+
+        /* ===== 响应式微调 ===== */
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 30px; letter-spacing: 2px; }
+            .meaning-card { min-width: 80px; padding: 16px 8px; }
+            .meaning-card .char { font-size: 34px; }
+            .service-price { font-size: 16px; }
+            .worker-card { flex: 1 1 140px; min-width: 120px; padding: 18px 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 顶部导航 -->
+    <nav class="navbar">
+        <div class="nav-logo">棒梆帮</div>
+        <a href="tel:你的手机号" class="nav-phone">📞 一键拨打</a>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-badge">胶州本地 · 大学生推荐</div>
+        <h1>棒梆帮</h1>
+        <p class="brand-desc">bàng bāng bāng</p>
+        <p class="hero-subtitle">家里东西坏了？别慌。<br>帮你对接胶州最靠谱的维修师傅。</p>
+        <p class="hero-location">📍 服务胶州城区</p>
+        <a href="#contact" class="hero-cta">马上预约 →</a>
+    </section>
+
+    <!-- 品牌释义 -->
+    <section class="brand-meaning">
+        <h2>为什么叫「棒梆帮」？</h2>
+        <div class="meaning-cards">
+            <div class="meaning-card">
+                <span class="char">棒</span>
+                <span class="label">技术棒</span>
+                <span class="desc">手艺过硬<br>活干得漂亮</span>
+            </div>
+            <div class="meaning-card">
+                <span class="char">梆</span>
+                <span class="label">响应快</span>
+                <span class="desc">敲敲门<br>师傅就到了</span>
+            </div>
+            <div class="meaning-card">
+                <span class="char">帮</span>
+                <span class="label">帮你忙</span>
+                <span class="desc">坏了找人<br>不用发愁</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 服务项目 & 价格 -->
+    <section class="services" id="services">
+        <h2>能修什么？</h2>
+        <p class="section-desc">明码标价，上门前就知道花多少</p>
+        <div class="service-list">
+
+            <div class="service-item">
+                <div class="service-icon">🔐</div>
+                <div class="service-info">
+                    <div class="service-name">开锁 / 换锁</div>
+                    <div class="service-tags">入户门 · 汽车开锁 · 换锁芯 · 智能锁安装</div>
+                </div>
+                <div class="service-price">80<small> 元起</small></div>
+            </div>
+
+            <div class="service-item">
+                <div class="service-icon">🚰</div>
+                <div class="service-info">
+                    <div class="service-name">管道疏通</div>
+                    <div class="service-tags">马桶 · 地漏 · 厨房水槽 · 主管道</div>
+                </div>
+                <div class="service-price">100<small> 元起</small></div>
+            </div>
+
+            <div class="service-item">
+                <div class="service-icon">🔧</div>
+                <div class="service-info">
+                    <div class="service-name">水电维修</div>
+                    <div class="service-tags">漏水 · 跳闸 · 换龙头 · 换开关插座 · 装灯</div>
+                </div>
+                <div class="service-price">60<small> 元起</small></div>
+            </div>
+
+            <div class="service-item">
+                <div class="service-icon">❄️</div>
+                <div class="service-info">
+                    <div class="service-name">空调清洗 / 维修</div>
+                    <div class="service-tags">深度清洗 · 加氟 · 不制冷 · 漏水</div>
+                </div>
+                <div class="service-price">120<small> 元起</small></div>
+            </div>
+
+            <div class="service-item">
+                <div class="service-icon">🛋️</div>
+                <div class="service-info">
+                    <div class="service-name">家具安装 / 维修</div>
+                    <div class="service-tags">家具组装 · 柜门调整 · 挂画挂电视 · 支架安装</div>
+                </div>
+                <div class="service-price">60<small> 元起</small></div>
+            </div>
+
+            <div class="service-item">
+                <div class="service-icon">💻</div>
+                <div class="service-info">
+                    <div class="service-name">网络 / 数码</div>
+                    <div class="service-tags">路由器调试 · WiFi优化 · 电脑维修 · 手机换屏</div>
+                </div>
+                <div class="service-price">80<small> 元起</small></div>
+            </div>
+
+            <div class="service-item">
+                <div class="service-icon">🏠</div>
+                <div class="service-info">
+                    <div class="service-name">墙面 / 防水</div>
+                    <div class="service-tags">补洞刷漆 · 防水补漏 · 美缝 · 瓷砖修复</div>
+                </div>
+                <div class="service-price">150<small> 元起</small></div>
+            </div>
+
+            <div class="service-item">
+                <div class="service-icon">🧹</div>
+                <div class="service-info">
+                    <div class="service-name">搬家 / 保洁</div>
+                    <div class="service-tags">小件搬家 · 深度保洁 · 大件垃圾清运</div>
+                </div>
+                <div class="service-price">100<small> 元起</small></div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 三大承诺 -->
+    <section class="promises">
+        <h2>为什么放心找我们？</h2>
+        <div class="promise-grid">
+            <div class="promise-card">
+                <div class="promise-icon">💰</div>
+                <div class="promise-title">价格透明</div>
+                <div class="promise-desc">修之前就告诉你<br>多少钱，不坐地起价</div>
+            </div>
+            <div class="promise-card">
+                <div class="promise-icon">🛡️</div>
+                <div class="promise-title">师傅靠谱</div>
+                <div class="promise-desc">每个师傅都<br>亲自筛选过</div>
+            </div>
+            <div class="promise-card">
+                <div class="promise-icon">🤝</div>
+                <div class="promise-title">售后兜底</div>
+                <div class="promise-desc">修完不满意<br>帮你协调到底</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 怎么用 -->
+    <section class="how-to">
+        <h2>三步搞定</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <div class="step-title">联系我们</div>
+                <div class="step-desc">打电话或加微信<br>说你家的故障</div>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <div class="step-title">确认价格</div>
+                <div class="step-desc">告诉你多少钱<br>合适再让师傅上门</div>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <div class="step-title">师傅上门</div>
+                <div class="step-desc">靠谱师傅到了<br>修好再走</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 师傅介绍 -->
+    <section class="workers">
+        <h2>我们的师傅</h2>
+        <p class="section-desc">每一个人都是亲手挑的</p>
+        <div class="worker-cards">
+            <div class="worker-card">
+                <div class="worker-avatar">🔐</div>
+                <div class="worker-name">王师傅</div>
+                <div class="worker-skill">开锁 / 安防</div>
+                <div class="worker-year">从业 12 年</div>
+                <div class="worker-badge">公安备案</div>
+            </div>
+            <div class="worker-card">
+                <div class="worker-avatar">🔧</div>
+                <div class="worker-name">李师傅</div>
+                <div class="worker-skill">水电 / 疏通</div>
+                <div class="worker-year">从业 20 年</div>
+                <div class="worker-badge">老师傅</div>
+            </div>
+            <div class="worker-card">
+                <div class="worker-avatar">❄️</div>
+                <div class="worker-name">张师傅</div>
+                <div class="worker-skill">空调 / 家电</div>
+                <div class="worker-year">从业 8 年</div>
+                <div class="worker-badge">品牌认证</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 常见问题 -->
+    <section class="faq">
+        <h2>你可能会问</h2>
+        <div class="faq-list">
+
+            <div class="faq-item">
+                <div class="faq-question">晚上/周末能上门吗？</div>
+                <div class="faq-answer">能。夜间和周末都有师傅值班，只是会加收一点夜间服务费（22:00 后 +30 元），预约时会提前告诉你。</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">师傅多久能到？</div>
+                <div class="faq-answer">胶州城区一般 20-30 分钟。具体看师傅当时的位置，预约时给你一个预估时间。</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">修不好怎么办？</div>
+                <div class="faq-answer">修不好不收人工费。如果用了材料，只收材料成本。修完有问题，一周内免费返修。</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">怎么付款？</div>
+                <div class="faq-answer">修完满意再付。微信转账或现金都行。先干活，后收钱。</div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 联系方式 -->
+    <section class="contact" id="contact">
+        <h2>坏了？现在就找我们</h2>
+        <p class="contact-desc">存下电话，坏了不慌</p>
+        <div class="contact-card">
+            <a href="tel:你的手机号" class="contact-phone">18906487380</a>
+            <p class="contact-label">👆 点击直接拨打</p>
+            <div class="contact-qr">
+                <img src="qrcode.png" width="140" height="140" style="border-radius:16px;" alt="微信扫码">
+            </div>
+            <p class="qr-tip">或扫码加微信备用</p>
+        </div>
+    </section>
+
+    <!-- 底部 -->
+    <footer class="footer">
+        <p><span class="brand">棒梆帮</span> · 胶州本地靠谱维修</p>
+        <p>棒的手艺 · 梆的响应 · 帮的初心</p>
+        <p style="margin-top:6px;">© 2026 棒梆帮</p>
+    </footer>
+
+    <!-- FAQ 折叠交互 -->
+    <script>
+        document.querySelectorAll('.faq-question').forEach(q => {
+            q.addEventListener('click', () => {
+                const item = q.parentElement;
+                const wasOpen = item.classList.contains('open');
+                // 关闭所有
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+                // 如果之前没打开就打开
+                if (!wasOpen) item.classList.add('open');
+            });
+        });
+    </script>
+
+</body>
+</html>
